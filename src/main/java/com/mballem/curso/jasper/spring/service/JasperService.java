@@ -11,6 +11,7 @@ import org.springframework.util.ResourceUtils;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.sql.Connection;
+import java.util.HashMap;
 import java.util.Map;
 
 @Service
@@ -23,7 +24,12 @@ public class JasperService {
     public static String JASPER_PREFIXO = "funcionario-";
     public static String JASPER_SUFIXO = ".jasper";
 
-    public Map<String, Object> params;
+    public Map<String, Object> params = new HashMap<>();
+
+    public JasperService() {
+        this.params.put("DIRETORIO_IMAGE", JASPER_DIRETORIO); //Parametro das imagens de title do relatorio
+        this.params.put("SUB_REPORT_DIR", JASPER_DIRETORIO); //Parametro para encontrar o sub-relatorio do funcionarios-10
+    }
 
     public void addParam(String key, Object value){
         this.params.put(key, value);

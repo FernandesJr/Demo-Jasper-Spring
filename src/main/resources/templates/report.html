@@ -9,7 +9,30 @@
 <body>
     <h1>Bem vindo ao curso!!!</h1>
     <br>
-    <a href="/relatorio/pdf?code=02&action=v">Abrir relatório</a>
-    <a href="/relatorio/pdf?code=02&action=d">Baixar relatório</a>
+    <h2>Relatório 01</h2>
+    <a href="/relatorio/pdf/jr01?code=02&action=v">Abrir relatório</a>
+    <a href="/relatorio/pdf/jr01?code=02&action=d">Baixar relatório</a>
+    <hr>
+    <br>
+    <div>
+        <h2>Relatório 09</h2>
+        <form th:action="@{/relatorio/pdf/jr09/09}">
+            <select th:name="nivel">
+                <option value="">Selecione o nível</option>
+                <option th:each="nivel : ${niveis}" th:value="${nivel}" th:text="${nivel}"></option>
+            </select>
+            <select th:name="uf">
+                <option value="">Selecione a UF</option>
+                <option th:each="uf : ${ufs}" th:value="${uf}" th:text="${uf}"></option>
+            </select>
+            <button type="submit">Abrir</button>
+        </form>
+    </div>
+    <hr>
+    <br>
+    <h2>Relatório 10</h2>
+    <a href="/relatorio/pdf/jr01?code=10&action=v">Abrir relatório</a>
+    <a href="/relatorio/pdf/jr01?code=10&action=d">Baixar relatório</a>
+    <hr>
 </body>
 </html>
