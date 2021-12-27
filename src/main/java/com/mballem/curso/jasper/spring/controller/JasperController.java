@@ -4,6 +4,7 @@ import com.mballem.curso.jasper.spring.repository.EnderecoRepository;
 import com.mballem.curso.jasper.spring.repository.FuncionarioRepository;
 import com.mballem.curso.jasper.spring.repository.NivelRepository;
 import com.mballem.curso.jasper.spring.service.JasperService;
+import net.sf.jasperreports.engine.JRException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
@@ -79,8 +81,18 @@ public class JasperController {
         }
     }
 
+    @GetMapping("/relatorio/html/jr19/{code}")
+    public void abrirRelatorio19HTML(@PathVariable("code") String code,
+                                     @RequestParam(name="idf", required = false) Long idFuncinario,
+                                     HttpServletResponse response, HttpServletRequest request) throws JRException {
+
+        response.setContentType(MediaType.TEXT_HTML_VALUE); //Avisando tipo da média que será gerada para resposta
+        this.service.addParam("ID_FUNCIONARIO",idFuncinario);
+        this.service.exportarHTML(code, request, response).exportReport();//Enviando para a resposta da requisição
+    }
+
     @GetMapping("/relatorio/pdf/jr19/{code}")
-    public void abrirRelatorio19(@PathVariable("code") String code,
+    public void abrirRelatorio19PDF(@PathVariable("code") String code,
                                  @RequestParam(name="idf", required = false) Long idFuncinario,
                                  HttpServletResponse response){
         System.out.println("funcionario-"+code);

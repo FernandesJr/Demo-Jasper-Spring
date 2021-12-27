@@ -9,5 +9,8 @@
 <body>
     <h1>Bem vindo ao curso!!!</h1>
     <a th:href="@{/abrir-relatorios}">reports</a>
+    <hr>
+    <h2 th:if="${mensagem} != null">Validação de Certificado</h2>
+    <p th:text="${mensagem}"></p>
 </body>
 </html>
